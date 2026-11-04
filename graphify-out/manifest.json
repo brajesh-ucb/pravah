@@ -138,5 +138,25 @@
     "mtime": 1793769411.140457,
     "ast_hash": "686834f79880aa8109f98e3aebcd7c84",
     "semantic_hash": "686834f79880aa8109f98e3aebcd7c84"
+  },
+  ".gemini/skills/debug-issue/SKILL.md": {
+    "mtime": 1793769695.5424836,
+    "ast_hash": "e56dde77c5960334afb8de48e9f3c167",
+    "semantic_hash": ""
+  },
+  ".gemini/skills/explore-codebase/SKILL.md": {
+    "mtime": 1793769695.542281,
+    "ast_hash": "76e306667ef1c1a4f9e6b7ae4d9bc551",
+    "semantic_hash": ""
+  },
+  ".gemini/skills/refactor-safely/SKILL.md": {
+    "mtime": 1793769695.542589,
+    "ast_hash": "5189a9e0e2260536b4d3519a77e09e66",
+    "semantic_hash": ""
+  },
+  ".gemini/skills/review-changes/SKILL.md": {
+    "mtime": 1793769695.5423841,
+    "ast_hash": "da6827b650c4af68611e7cd7e138c08f",
+    "semantic_hash": ""
   }
 }
