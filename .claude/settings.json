@@ -10,6 +10,16 @@
             "timeout": 30
           }
         ]
+      },
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cat >/dev/null; cd \"/Users/brajesh/Documents/ai-product-labs/pravah\" && PYTHONHASHSEED=0 nohup /Library/Frameworks/Python.framework/Versions/3.13/bin/graphify update . >>\"$HOME/.cache/graphify-rebuild.log\" 2>&1 &",
+            "timeout": 5
+          }
+        ]
       }
     ],
     "SessionStart": [

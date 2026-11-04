@@ -1,1 +1,0 @@
-{"nodes": [{"id": "skill_review_changes", "label": "Review Changes", "file_type": "rationale", "source_file": ".claude/skills/review-changes/skill.md"}], "edges": [{"source": "skill_review_changes", "target": "tool_detect_changes", "relation": "calls", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": ".claude/skills/review-changes/skill.md"}], "hyperedges": []}
