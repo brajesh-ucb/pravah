@@ -1,5 +1,6 @@
 import CoreLocation
 import Foundation
+import MapKit
 import Observation
 
 @MainActor @Observable
@@ -14,7 +15,6 @@ final class ContextEngine: NSObject, CLLocationManagerDelegate {
     private static let mockLocationName = "Marin Headlands, CA"
 
     @ObservationIgnored private let locationManager = CLLocationManager()
-    @ObservationIgnored private let geocoder = CLGeocoder()
     @ObservationIgnored private let solarPhaseCalculator = SolarPhaseCalculator()
     @ObservationIgnored private var locationContinuation: CheckedContinuation<CLLocation?, Never>?
 
@@ -60,10 +60,13 @@ final class ContextEngine: NSObject, CLLocationManagerDelegate {
     }
 
     private func placeName(for location: CLLocation?) async -> String? {
-        guard let location else { return nil }
-        let placemarks = try? await geocoder.reverseGeocodeLocation(location)
-        guard let placemark = placemarks?.first else { return nil }
-        return placemark.areasOfInterest?.first ?? placemark.subLocality ?? placemark.locality
+        guard let location, let request = MKReverseGeocodingRequest(location: location) else { return nil }
+        return await withCheckedContinuation { continuation in
+            request.getMapItems { mapItems, _ in
+                let mapItem = mapItems?.first
+                continuation.resume(returning: mapItem?.name ?? mapItem?.addressRepresentations?.cityName)
+            }
+        }
     }
 
     private func finishLocationRequest(with location: CLLocation?) {
