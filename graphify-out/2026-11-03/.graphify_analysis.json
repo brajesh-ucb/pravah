@@ -1,0 +1,225 @@
+{
+  "communities": {
+    "0": [
+      "agents_mcp_tools",
+      "claude_mcp_tools",
+      "skill_debug_issue",
+      "skill_review_changes",
+      "tool_detect_changes",
+      "tool_get_minimal_context",
+      "tool_query_graph",
+      "tool_semantic_search_nodes"
+    ],
+    "1": [
+      "app",
+      "pravah_contentview",
+      "pravah_contentview_contentview",
+      "pravah_pravahapp",
+      "pravah_pravahapp_pravahapp",
+      "scene",
+      "swiftui",
+      "view"
+    ],
+    "2": [
+      "pravahuitests_pravahuitests",
+      "pravahuitests_pravahuitests_pravahuitests",
+      "pravahuitests_pravahuitests_pravahuitests_setupwitherror",
+      "pravahuitests_pravahuitests_pravahuitests_teardownwitherror",
+      "pravahuitests_pravahuitests_pravahuitests_testexample",
+      "pravahuitests_pravahuitests_pravahuitests_testlaunchperformance",
+      "xctest",
+      "xctestcase"
+    ],
+    "3": [
+      "pravah",
+      "pravahtests_pravahtests",
+      "pravahtests_pravahtests_pravahtests",
+      "pravahtests_pravahtests_pravahtests_example",
+      "testing"
+    ],
+    "4": [
+      "cursor_mcp",
+      "cursor_mcp_json_mcp_command_library_frameworks_python_framework_versions_3_13_bin_python3_13",
+      "cursor_mcp_mcp_server_code_review_graph"
+    ],
+    "5": [
+      "mcp",
+      "mcp_json_mcp_command_library_frameworks_python_framework_versions_3_13_bin_python3_13",
+      "mcp_mcp_server_code_review_graph"
+    ],
+    "6": [
+      "qoder_mcp",
+      "qoder_mcp_json_mcp_command_library_frameworks_python_framework_versions_3_13_bin_python3_13",
+      "qoder_mcp_mcp_server_code_review_graph"
+    ],
+    "7": [
+      "claude_graphify",
+      "readme_pravah"
+    ],
+    "8": [
+      "hooks_crg_session_start",
+      "users_brajesh_documents_ai_product_labs_pravah_gemini_hooks_crg_session_start_sh__entry"
+    ],
+    "9": [
+      "hooks_crg_update",
+      "users_brajesh_documents_ai_product_labs_pravah_gemini_hooks_crg_update_sh__entry"
+    ],
+    "10": [
+      "instruction_code_review_graph",
+      "tool_get_impact_radius"
+    ],
+    "11": [
+      "skill_explore_codebase",
+      "tool_get_architecture_overview"
+    ],
+    "12": [
+      "skill_refactor_safely",
+      "tool_refactor_tool"
+    ],
+    "13": [
+      "steering_code_review_graph",
+      "tool_get_affected_flows"
+    ],
+    "14": [
+      "gemini_mcp_tools"
+    ],
+    "15": [
+      "qoder_mcp_tools"
+    ],
+    "16": [
+      "tool_get_review_context"
+    ]
+  },
+  "cohesion": {
+    "0": 0.2857142857142857,
+    "1": 0.25,
+    "2": 0.25,
+    "3": 0.4,
+    "4": 0.6666666666666666,
+    "5": 0.6666666666666666,
+    "6": 0.6666666666666666,
+    "7": 1.0,
+    "8": 1.0,
+    "9": 1.0,
+    "10": 1.0,
+    "11": 1.0,
+    "12": 1.0,
+    "13": 1.0,
+    "14": 1.0,
+    "15": 1.0,
+    "16": 1.0
+  },
+  "gods": [
+    {
+      "id": "pravahuitests_pravahuitests_pravahuitests",
+      "label": "pravahUITests",
+      "degree": 6
+    },
+    {
+      "id": "pravah_pravahapp_pravahapp",
+      "label": "pravahApp",
+      "degree": 3
+    },
+    {
+      "id": "agents_mcp_tools",
+      "label": "MCP Tools: code-review-graph",
+      "degree": 3
+    },
+    {
+      "id": "skill_debug_issue",
+      "label": "Debug Issue",
+      "degree": 3
+    },
+    {
+      "id": "tool_detect_changes",
+      "label": "detect_changes",
+      "degree": 3
+    },
+    {
+      "id": "cursor_mcp_mcp_server_code_review_graph",
+      "label": "code-review-graph",
+      "degree": 2
+    },
+    {
+      "id": "mcp_mcp_server_code_review_graph",
+      "label": "code-review-graph",
+      "degree": 2
+    },
+    {
+      "id": "qoder_mcp_mcp_server_code_review_graph",
+      "label": "code-review-graph",
+      "degree": 2
+    },
+    {
+      "id": "swiftui",
+      "label": "SwiftUI",
+      "degree": 2
+    },
+    {
+      "id": "pravah_contentview_contentview",
+      "label": "ContentView",
+      "degree": 2
+    }
+  ],
+  "surprises": [
+    {
+      "source": "MCP Tools: code-review-graph",
+      "target": "MCP Tools: code-review-graph",
+      "source_files": [
+        "AGENTS.md",
+        "CLAUDE.md"
+      ],
+      "confidence": "INFERRED",
+      "relation": "semantically_similar_to",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories; semantically similar concepts with no structural link"
+    },
+    {
+      "source": "graphify",
+      "target": "pravah",
+      "source_files": [
+        "CLAUDE.md",
+        "README.md"
+      ],
+      "confidence": "INFERRED",
+      "relation": "conceptually_related_to",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories"
+    },
+    {
+      "source": "MCP Tools: code-review-graph",
+      "target": "detect_changes",
+      "source_files": [
+        "CLAUDE.md",
+        "AGENTS.md"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "connects across different repos/directories"
+    },
+    {
+      "source": "Debug Issue",
+      "target": "query_graph",
+      "source_files": [
+        ".claude/skills/debug-issue/skill.md",
+        "AGENTS.md"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "connects across different repos/directories"
+    },
+    {
+      "source": "Debug Issue",
+      "target": "semantic_search_nodes",
+      "source_files": [
+        ".claude/skills/debug-issue/skill.md",
+        "AGENTS.md"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "connects across different repos/directories"
+    }
+  ],
+  "tokens": {
+    "input": 7619,
+    "output": 2296
+  }
+}

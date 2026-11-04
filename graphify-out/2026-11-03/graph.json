@@ -1,0 +1,940 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "label": "mcp.json",
+      "file_type": "code",
+      "source_file": ".cursor/mcp.json",
+      "source_location": "L1",
+      "metadata": {
+        "mcp_kind": "mcp_config_file"
+      },
+      "_origin": "ast",
+      "id": "cursor_mcp",
+      "community": 4,
+      "norm_label": "mcp.json"
+    },
+    {
+      "label": "code-review-graph",
+      "file_type": "code",
+      "source_file": ".cursor/mcp.json",
+      "source_location": "L1",
+      "metadata": {
+        "mcp_kind": "mcp_server"
+      },
+      "_origin": "ast",
+      "id": "cursor_mcp_mcp_server_code_review_graph",
+      "community": 4,
+      "norm_label": "code-review-graph"
+    },
+    {
+      "label": "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3.13",
+      "file_type": "code",
+      "source_file": ".cursor/mcp.json",
+      "source_location": "L1",
+      "metadata": {
+        "mcp_kind": "mcp_command"
+      },
+      "_origin": "ast",
+      "id": "cursor_mcp_json_mcp_command_library_frameworks_python_framework_versions_3_13_bin_python3_13",
+      "community": 4,
+      "norm_label": "/library/frameworks/python.framework/versions/3.13/bin/python3.13"
+    },
+    {
+      "label": "crg-session-start.sh",
+      "file_type": "code",
+      "source_file": ".gemini/hooks/crg-session-start.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "id": "hooks_crg_session_start",
+      "community": 8,
+      "norm_label": "crg-session-start.sh"
+    },
+    {
+      "label": "crg-session-start.sh script",
+      "file_type": "code",
+      "source_file": ".gemini/hooks/crg-session-start.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "id": "users_brajesh_documents_ai_product_labs_pravah_gemini_hooks_crg_session_start_sh__entry",
+      "community": 8,
+      "norm_label": "crg-session-start.sh script"
+    },
+    {
+      "label": "crg-update.sh",
+      "file_type": "code",
+      "source_file": ".gemini/hooks/crg-update.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "id": "hooks_crg_update",
+      "community": 9,
+      "norm_label": "crg-update.sh"
+    },
+    {
+      "label": "crg-update.sh script",
+      "file_type": "code",
+      "source_file": ".gemini/hooks/crg-update.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "id": "users_brajesh_documents_ai_product_labs_pravah_gemini_hooks_crg_update_sh__entry",
+      "community": 9,
+      "norm_label": "crg-update.sh script"
+    },
+    {
+      "label": ".mcp.json",
+      "file_type": "code",
+      "source_file": ".mcp.json",
+      "source_location": "L1",
+      "metadata": {
+        "mcp_kind": "mcp_config_file"
+      },
+      "_origin": "ast",
+      "id": "mcp",
+      "community": 5,
+      "norm_label": ".mcp.json"
+    },
+    {
+      "label": "code-review-graph",
+      "file_type": "code",
+      "source_file": ".mcp.json",
+      "source_location": "L1",
+      "metadata": {
+        "mcp_kind": "mcp_server"
+      },
+      "_origin": "ast",
+      "id": "mcp_mcp_server_code_review_graph",
+      "community": 5,
+      "norm_label": "code-review-graph"
+    },
+    {
+      "label": "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3.13",
+      "file_type": "code",
+      "source_file": ".mcp.json",
+      "source_location": "L1",
+      "metadata": {
+        "mcp_kind": "mcp_command"
+      },
+      "_origin": "ast",
+      "id": "mcp_json_mcp_command_library_frameworks_python_framework_versions_3_13_bin_python3_13",
+      "community": 5,
+      "norm_label": "/library/frameworks/python.framework/versions/3.13/bin/python3.13"
+    },
+    {
+      "label": "mcp.json",
+      "file_type": "code",
+      "source_file": ".qoder/mcp.json",
+      "source_location": "L1",
+      "metadata": {
+        "mcp_kind": "mcp_config_file"
+      },
+      "_origin": "ast",
+      "id": "qoder_mcp",
+      "community": 6,
+      "norm_label": "mcp.json"
+    },
+    {
+      "label": "code-review-graph",
+      "file_type": "code",
+      "source_file": ".qoder/mcp.json",
+      "source_location": "L1",
+      "metadata": {
+        "mcp_kind": "mcp_server"
+      },
+      "_origin": "ast",
+      "id": "qoder_mcp_mcp_server_code_review_graph",
+      "community": 6,
+      "norm_label": "code-review-graph"
+    },
+    {
+      "label": "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3.13",
+      "file_type": "code",
+      "source_file": ".qoder/mcp.json",
+      "source_location": "L1",
+      "metadata": {
+        "mcp_kind": "mcp_command"
+      },
+      "_origin": "ast",
+      "id": "qoder_mcp_json_mcp_command_library_frameworks_python_framework_versions_3_13_bin_python3_13",
+      "community": 6,
+      "norm_label": "/library/frameworks/python.framework/versions/3.13/bin/python3.13"
+    },
+    {
+      "label": "ContentView.swift",
+      "file_type": "code",
+      "source_file": "pravah/ContentView.swift",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "pravah_contentview",
+      "community": 1,
+      "norm_label": "contentview.swift"
+    },
+    {
+      "label": "SwiftUI",
+      "file_type": "code",
+      "type": "module",
+      "source_file": "pravah/ContentView.swift",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "swiftui",
+      "community": 1,
+      "norm_label": "swiftui"
+    },
+    {
+      "label": "ContentView",
+      "file_type": "code",
+      "source_file": "pravah/ContentView.swift",
+      "source_location": "L10",
+      "_origin": "ast",
+      "id": "pravah_contentview_contentview",
+      "community": 1,
+      "norm_label": "contentview"
+    },
+    {
+      "label": "View",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast",
+      "id": "view",
+      "community": 1,
+      "norm_label": "view"
+    },
+    {
+      "label": "pravahApp.swift",
+      "file_type": "code",
+      "source_file": "pravah/pravahApp.swift",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "pravah_pravahapp",
+      "community": 1,
+      "norm_label": "pravahapp.swift"
+    },
+    {
+      "label": "pravahApp",
+      "file_type": "code",
+      "source_file": "pravah/pravahApp.swift",
+      "source_location": "L10",
+      "_origin": "ast",
+      "id": "pravah_pravahapp_pravahapp",
+      "community": 1,
+      "norm_label": "pravahapp"
+    },
+    {
+      "label": "App",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast",
+      "id": "app",
+      "community": 1,
+      "norm_label": "app"
+    },
+    {
+      "label": "Scene",
+      "file_type": "code",
+      "source_file": "pravah/pravahApp.swift",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "scene",
+      "community": 1,
+      "norm_label": "scene"
+    },
+    {
+      "label": "pravahTests.swift",
+      "file_type": "code",
+      "source_file": "pravahTests/pravahTests.swift",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "pravahtests_pravahtests",
+      "community": 3,
+      "norm_label": "pravahtests.swift"
+    },
+    {
+      "label": "Testing",
+      "file_type": "code",
+      "type": "module",
+      "source_file": "pravahTests/pravahTests.swift",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "testing",
+      "community": 3,
+      "norm_label": "testing"
+    },
+    {
+      "label": "pravah",
+      "file_type": "code",
+      "type": "module",
+      "source_file": "pravahTests/pravahTests.swift",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "pravah",
+      "community": 3,
+      "norm_label": "pravah"
+    },
+    {
+      "label": "pravahTests",
+      "file_type": "code",
+      "source_file": "pravahTests/pravahTests.swift",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "pravahtests_pravahtests_pravahtests",
+      "community": 3,
+      "norm_label": "pravahtests"
+    },
+    {
+      "label": ".example()",
+      "file_type": "code",
+      "source_file": "pravahTests/pravahTests.swift",
+      "source_location": "L13",
+      "_origin": "ast",
+      "id": "pravahtests_pravahtests_pravahtests_example",
+      "community": 3,
+      "norm_label": ".example()"
+    },
+    {
+      "label": "pravahUITests.swift",
+      "file_type": "code",
+      "source_file": "pravahUITests/pravahUITests.swift",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "pravahuitests_pravahuitests",
+      "community": 2,
+      "norm_label": "pravahuitests.swift"
+    },
+    {
+      "label": "XCTest",
+      "file_type": "code",
+      "type": "module",
+      "source_file": "pravahUITests/pravahUITests.swift",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "xctest",
+      "community": 2,
+      "norm_label": "xctest"
+    },
+    {
+      "label": "pravahUITests",
+      "file_type": "code",
+      "source_file": "pravahUITests/pravahUITests.swift",
+      "source_location": "L10",
+      "_origin": "ast",
+      "id": "pravahuitests_pravahuitests_pravahuitests",
+      "community": 2,
+      "norm_label": "pravahuitests"
+    },
+    {
+      "label": "XCTestCase",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast",
+      "id": "xctestcase",
+      "community": 2,
+      "norm_label": "xctestcase"
+    },
+    {
+      "label": ".setUpWithError()",
+      "file_type": "code",
+      "source_file": "pravahUITests/pravahUITests.swift",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "pravahuitests_pravahuitests_pravahuitests_setupwitherror",
+      "community": 2,
+      "norm_label": ".setupwitherror()"
+    },
+    {
+      "label": ".tearDownWithError()",
+      "file_type": "code",
+      "source_file": "pravahUITests/pravahUITests.swift",
+      "source_location": "L21",
+      "_origin": "ast",
+      "id": "pravahuitests_pravahuitests_pravahuitests_teardownwitherror",
+      "community": 2,
+      "norm_label": ".teardownwitherror()"
+    },
+    {
+      "label": ".testExample()",
+      "file_type": "code",
+      "source_file": "pravahUITests/pravahUITests.swift",
+      "source_location": "L25",
+      "_origin": "ast",
+      "id": "pravahuitests_pravahuitests_pravahuitests_testexample",
+      "community": 2,
+      "norm_label": ".testexample()"
+    },
+    {
+      "label": ".testLaunchPerformance()",
+      "file_type": "code",
+      "source_file": "pravahUITests/pravahUITests.swift",
+      "source_location": "L36",
+      "_origin": "ast",
+      "id": "pravahuitests_pravahuitests_pravahuitests_testlaunchperformance",
+      "community": 2,
+      "norm_label": ".testlaunchperformance()"
+    },
+    {
+      "label": "MCP Tools: code-review-graph",
+      "file_type": "document",
+      "source_file": "AGENTS.md",
+      "id": "agents_mcp_tools",
+      "community": 0,
+      "norm_label": "mcp tools: code-review-graph"
+    },
+    {
+      "label": "MCP Tools: code-review-graph",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "id": "claude_mcp_tools",
+      "community": 0,
+      "norm_label": "mcp tools: code-review-graph"
+    },
+    {
+      "label": "graphify",
+      "file_type": "concept",
+      "source_file": "CLAUDE.md",
+      "id": "claude_graphify",
+      "community": 7,
+      "norm_label": "graphify"
+    },
+    {
+      "label": "MCP Tools: code-review-graph",
+      "file_type": "document",
+      "source_file": "GEMINI.md",
+      "id": "gemini_mcp_tools",
+      "community": 14,
+      "norm_label": "mcp tools: code-review-graph"
+    },
+    {
+      "label": "MCP Tools: code-review-graph",
+      "file_type": "document",
+      "source_file": "QODER.md",
+      "id": "qoder_mcp_tools",
+      "community": 15,
+      "norm_label": "mcp tools: code-review-graph"
+    },
+    {
+      "label": "pravah",
+      "file_type": "document",
+      "source_file": "README.md",
+      "id": "readme_pravah",
+      "community": 7,
+      "norm_label": "pravah"
+    },
+    {
+      "label": "Debug Issue",
+      "file_type": "rationale",
+      "source_file": ".claude/skills/debug-issue/skill.md",
+      "id": "skill_debug_issue",
+      "community": 0,
+      "norm_label": "debug issue"
+    },
+    {
+      "label": "Explore Codebase",
+      "file_type": "rationale",
+      "source_file": ".claude/skills/explore-codebase/skill.md",
+      "id": "skill_explore_codebase",
+      "community": 11,
+      "norm_label": "explore codebase"
+    },
+    {
+      "label": "Refactor Safely",
+      "file_type": "rationale",
+      "source_file": ".claude/skills/refactor-safely/skill.md",
+      "id": "skill_refactor_safely",
+      "community": 12,
+      "norm_label": "refactor safely"
+    },
+    {
+      "label": "Review Changes",
+      "file_type": "rationale",
+      "source_file": ".claude/skills/review-changes/skill.md",
+      "id": "skill_review_changes",
+      "community": 0,
+      "norm_label": "review changes"
+    },
+    {
+      "label": "code-review-graph instruction",
+      "file_type": "document",
+      "source_file": ".github/code-review-graph.instruction.md",
+      "id": "instruction_code_review_graph",
+      "community": 10,
+      "norm_label": "code-review-graph instruction"
+    },
+    {
+      "label": "MCP Tools: code-review-graph",
+      "file_type": "document",
+      "source_file": ".kiro/steering/code-review-graph.md",
+      "id": "steering_code_review_graph",
+      "community": 13,
+      "norm_label": "mcp tools: code-review-graph"
+    },
+    {
+      "label": "detect_changes",
+      "file_type": "code",
+      "source_file": "AGENTS.md",
+      "id": "tool_detect_changes",
+      "community": 0,
+      "norm_label": "detect_changes"
+    },
+    {
+      "label": "get_review_context",
+      "file_type": "code",
+      "source_file": "AGENTS.md",
+      "id": "tool_get_review_context",
+      "community": 16,
+      "norm_label": "get_review_context"
+    },
+    {
+      "label": "get_impact_radius",
+      "file_type": "code",
+      "source_file": "AGENTS.md",
+      "id": "tool_get_impact_radius",
+      "community": 10,
+      "norm_label": "get_impact_radius"
+    },
+    {
+      "label": "get_affected_flows",
+      "file_type": "code",
+      "source_file": "AGENTS.md",
+      "id": "tool_get_affected_flows",
+      "community": 13,
+      "norm_label": "get_affected_flows"
+    },
+    {
+      "label": "query_graph",
+      "file_type": "code",
+      "source_file": "AGENTS.md",
+      "id": "tool_query_graph",
+      "community": 0,
+      "norm_label": "query_graph"
+    },
+    {
+      "label": "semantic_search_nodes",
+      "file_type": "code",
+      "source_file": "AGENTS.md",
+      "id": "tool_semantic_search_nodes",
+      "community": 0,
+      "norm_label": "semantic_search_nodes"
+    },
+    {
+      "label": "get_architecture_overview",
+      "file_type": "code",
+      "source_file": "AGENTS.md",
+      "id": "tool_get_architecture_overview",
+      "community": 11,
+      "norm_label": "get_architecture_overview"
+    },
+    {
+      "label": "refactor_tool",
+      "file_type": "code",
+      "source_file": "AGENTS.md",
+      "id": "tool_refactor_tool",
+      "community": 12,
+      "norm_label": "refactor_tool"
+    },
+    {
+      "label": "get_minimal_context",
+      "file_type": "code",
+      "source_file": ".claude/skills/debug-issue/skill.md",
+      "id": "tool_get_minimal_context",
+      "community": 0,
+      "norm_label": "get_minimal_context"
+    }
+  ],
+  "links": [
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".cursor/mcp.json",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "cursor_mcp",
+      "target": "cursor_mcp_mcp_server_code_review_graph"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".cursor/mcp.json",
+      "source_location": "L1",
+      "weight": 1.0,
+      "context": "command",
+      "source": "cursor_mcp_mcp_server_code_review_graph",
+      "target": "cursor_mcp_json_mcp_command_library_frameworks_python_framework_versions_3_13_bin_python3_13"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".gemini/hooks/crg-session-start.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "hooks_crg_session_start",
+      "target": "users_brajesh_documents_ai_product_labs_pravah_gemini_hooks_crg_session_start_sh__entry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".gemini/hooks/crg-update.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "hooks_crg_update",
+      "target": "users_brajesh_documents_ai_product_labs_pravah_gemini_hooks_crg_update_sh__entry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".mcp.json",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "mcp",
+      "target": "mcp_mcp_server_code_review_graph"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".mcp.json",
+      "source_location": "L1",
+      "weight": 1.0,
+      "context": "command",
+      "source": "mcp_mcp_server_code_review_graph",
+      "target": "mcp_json_mcp_command_library_frameworks_python_framework_versions_3_13_bin_python3_13"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".qoder/mcp.json",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "qoder_mcp",
+      "target": "qoder_mcp_mcp_server_code_review_graph"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".qoder/mcp.json",
+      "source_location": "L1",
+      "weight": 1.0,
+      "context": "command",
+      "source": "qoder_mcp_mcp_server_code_review_graph",
+      "target": "qoder_mcp_json_mcp_command_library_frameworks_python_framework_versions_3_13_bin_python3_13"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "pravah/ContentView.swift",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "pravah_contentview",
+      "target": "pravah_contentview_contentview",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "pravah/ContentView.swift",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "pravah_contentview",
+      "target": "swiftui",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "pravah/pravahApp.swift",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "pravah_pravahapp",
+      "target": "swiftui",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "pravah/ContentView.swift",
+      "source_location": "L11",
+      "weight": 1.0,
+      "context": "field",
+      "source": "pravah_contentview_contentview",
+      "target": "view",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "pravah/pravahApp.swift",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "pravah_pravahapp",
+      "target": "pravah_pravahapp_pravahapp",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "source_file": "pravah/pravahApp.swift",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "pravah_pravahapp_pravahapp",
+      "target": "app",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "pravah/pravahApp.swift",
+      "source_location": "L12",
+      "weight": 1.0,
+      "context": "field",
+      "source": "pravah_pravahapp_pravahapp",
+      "target": "scene",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "pravahTests/pravahTests.swift",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "pravahtests_pravahtests",
+      "target": "pravah",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "pravahTests/pravahTests.swift",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "pravahtests_pravahtests",
+      "target": "pravahtests_pravahtests_pravahtests",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "pravahTests/pravahTests.swift",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "pravahtests_pravahtests",
+      "target": "testing",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "pravahTests/pravahTests.swift",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "pravahtests_pravahtests_pravahtests",
+      "target": "pravahtests_pravahtests_pravahtests_example",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "pravahUITests/pravahUITests.swift",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "pravahuitests_pravahuitests",
+      "target": "pravahuitests_pravahuitests_pravahuitests",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "pravahUITests/pravahUITests.swift",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "pravahuitests_pravahuitests",
+      "target": "xctest",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "pravahUITests/pravahUITests.swift",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "pravahuitests_pravahuitests_pravahuitests",
+      "target": "pravahuitests_pravahuitests_pravahuitests_setupwitherror",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "pravahUITests/pravahUITests.swift",
+      "source_location": "L21",
+      "weight": 1.0,
+      "source": "pravahuitests_pravahuitests_pravahuitests",
+      "target": "pravahuitests_pravahuitests_pravahuitests_teardownwitherror",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "pravahUITests/pravahUITests.swift",
+      "source_location": "L25",
+      "weight": 1.0,
+      "source": "pravahuitests_pravahuitests_pravahuitests",
+      "target": "pravahuitests_pravahuitests_pravahuitests_testexample",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "pravahUITests/pravahUITests.swift",
+      "source_location": "L36",
+      "weight": 1.0,
+      "source": "pravahuitests_pravahuitests_pravahuitests",
+      "target": "pravahuitests_pravahuitests_pravahuitests_testlaunchperformance",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "pravahUITests/pravahUITests.swift",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "pravahuitests_pravahuitests_pravahuitests",
+      "target": "xctestcase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "source_file": "CLAUDE.md",
+      "source": "agents_mcp_tools",
+      "target": "claude_mcp_tools"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "AGENTS.md",
+      "source": "agents_mcp_tools",
+      "target": "tool_detect_changes"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "AGENTS.md",
+      "source": "agents_mcp_tools",
+      "target": "tool_query_graph"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "CLAUDE.md",
+      "source": "claude_mcp_tools",
+      "target": "tool_detect_changes"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "source_file": "CLAUDE.md",
+      "source": "claude_graphify",
+      "target": "readme_pravah"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/debug-issue/skill.md",
+      "source": "skill_debug_issue",
+      "target": "tool_get_minimal_context"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/debug-issue/skill.md",
+      "source": "skill_debug_issue",
+      "target": "tool_query_graph"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/debug-issue/skill.md",
+      "source": "skill_debug_issue",
+      "target": "tool_semantic_search_nodes"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/explore-codebase/skill.md",
+      "source": "skill_explore_codebase",
+      "target": "tool_get_architecture_overview"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/refactor-safely/skill.md",
+      "source": "skill_refactor_safely",
+      "target": "tool_refactor_tool"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/review-changes/skill.md",
+      "source": "skill_review_changes",
+      "target": "tool_detect_changes"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".github/code-review-graph.instruction.md",
+      "source": "instruction_code_review_graph",
+      "target": "tool_get_impact_radius"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".kiro/steering/code-review-graph.md",
+      "source": "steering_code_review_graph",
+      "target": "tool_get_affected_flows"
+    }
+  ],
+  "hyperedges": [],
+  "built_at_commit": "6584390e6846a6413130394f13bc80e0f2d10316"
+}
