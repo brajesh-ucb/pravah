@@ -66,6 +66,20 @@ actor VaultActor {
         try write(data, to: assetsURL.appending(path: fileName, directoryHint: .notDirectory))
         return "\(Self.assetsDirectoryName)/\(fileName)"
     }
+
+    func loadAssetData(relativePath: String) async throws -> Data {
+        let url = vaultURL.appending(path: relativePath, directoryHint: .notDirectory).standardizedFileURL
+        guard url.path(percentEncoded: false).hasPrefix(assetsURL.standardizedFileURL.path(percentEncoded: false)) else {
+            throw VaultError.readFailed(url)
+        }
+        guard FileManager.default.fileExists(atPath: url.path(percentEncoded: false)) else {
+            throw VaultError.fileNotFound(url)
+        }
+        guard let data = try? Data(contentsOf: url) else {
+            throw VaultError.readFailed(url)
+        }
+        return data
+    }
 }
 
 private extension VaultActor {

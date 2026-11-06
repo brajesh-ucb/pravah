@@ -1,5 +1,6 @@
 import SwiftUI
 import CoreLocation
+import PhotosUI
 
 struct QuickCaptureSheet: View {
     let onSave: @Sendable () -> Void
@@ -15,6 +16,10 @@ struct QuickCaptureSheet: View {
     @State private var customLatitude: Double?
     @State private var customLongitude: Double?
     @State private var customLocationName: String?
+    @State private var selectedPhotoItem: PhotosPickerItem? = nil
+    @State private var selectedImageData: Data? = nil
+    @State private var selectedImagePreview: Image? = nil
+    @State private var didExtractText = false
 
     init(initialPin: DroppedPin? = nil, onSave: @escaping @Sendable () -> Void) {
         self.onSave = onSave
@@ -36,11 +41,17 @@ struct QuickCaptureSheet: View {
                 Section("Context") {
                     locationBannerButton
                 }
+                Section("Attachments") {
+                    attachmentContent
+                }
             }
             .navigationTitle("Quick Capture")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar { toolbarContent }
             .task { await contextEngine.fetchCurrentContext() }
+            .onChange(of: selectedPhotoItem) { _, item in
+                Task { await loadPhoto(from: item) }
+            }
             .sheet(isPresented: $isPresentingLocationPicker) { locationPicker }
             .alert("Couldn't Save Entry", isPresented: isShowingError) {
                 Button("OK", role: .cancel) { }
@@ -89,6 +100,41 @@ struct QuickCaptureSheet: View {
         .buttonStyle(.plain)
     }
 
+    @ViewBuilder
+    private var attachmentContent: some View {
+        PhotosPicker(selection: $selectedPhotoItem, matching: .images) {
+            Label("Attach Photo", systemImage: "photo.badge.plus")
+        }
+        if let selectedImagePreview {
+            selectedImagePreview
+                .resizable()
+                .scaledToFill()
+                .frame(height: 180)
+                .frame(maxWidth: .infinity)
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+                .overlay(alignment: .topTrailing) { removePhotoButton }
+        }
+        if didExtractText {
+            Label("OCR Extracted", systemImage: "sparkles")
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(.tint)
+                .padding(.horizontal, 10)
+                .padding(.vertical, 4)
+                .background(.tint.opacity(0.15), in: .capsule)
+        }
+    }
+
+    private var removePhotoButton: some View {
+        Button(action: removePhoto) {
+            Image(systemName: "xmark.circle.fill")
+                .font(.title2)
+                .symbolRenderingMode(.palette)
+                .foregroundStyle(.white, .red)
+        }
+        .buttonStyle(.plain)
+        .padding(8)
+    }
+
     private var locationPicker: some View {
         let currentCoordinate = contextEngine.currentLocation?.coordinate
         let latitude = customLatitude ?? currentCoordinate?.latitude
@@ -135,11 +181,42 @@ struct QuickCaptureSheet: View {
         )
     }
 
+    private func loadPhoto(from item: PhotosPickerItem?) async {
+        guard let item,
+              let data = try? await item.loadTransferable(type: Data.self),
+              let pngData = UIImage(data: data)?.pngData() else { return }
+        selectedImageData = pngData
+        selectedImagePreview = UIImage(data: pngData).map(Image.init(uiImage:))
+        await appendExtractedText(from: pngData)
+    }
+
+    private func appendExtractedText(from imageData: Data) async {
+        let recognizedText = (try? await OCREngine().recognizeText(in: imageData)) ?? ""
+        let trimmedText = recognizedText.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmedText.isEmpty else { return }
+        let separator = entryBody.isEmpty ? "" : "\n\n"
+        entryBody += "\(separator)--- Extracted Text ---\n\(trimmedText)"
+        didExtractText = true
+    }
+
+    private func removePhoto() {
+        didExtractText = false
+        selectedPhotoItem = nil
+        selectedImageData = nil
+        selectedImagePreview = nil
+    }
+
     private func saveEntry() async {
         isSaving = true
         defer { isSaving = false }
         do {
-            _ = try await VaultActor().saveEntry(makeEntry())
+            let vault = VaultActor()
+            var entry = makeEntry()
+            if let imageData = selectedImageData {
+                let assetPath = try await vault.saveAssetData(imageData, fileExtension: "png")
+                entry.assetRelativePaths = [assetPath]
+            }
+            _ = try await vault.saveEntry(entry)
             onSave()
             dismiss()
         } catch {
