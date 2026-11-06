@@ -13,11 +13,13 @@ struct ContentView: View {
     @State private var isPresentingCapture = false
     @State private var entries: [JournalEntry] = []
     @State private var vault = VaultActor()
+    @State private var navigationPath: [JournalEntry] = []
 
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $navigationPath) {
             ZStack(alignment: .bottomTrailing) {
                 VStack(spacing: 0) {
+                    SearchField(text: $searchText)
                     tabPicker
                     tabContent
                 }
@@ -25,7 +27,7 @@ struct ContentView: View {
                     .padding(20)
             }
             .navigationTitle("Pravah")
-            .searchable(text: $searchText, prompt: "Search entries, places, tags...")
+            .navigationDestination(for: JournalEntry.self) { EntryDetailView(entry: $0) }
             .sheet(isPresented: $isPresentingCapture) {
                 QuickCaptureSheet(onSave: { Task { await loadVaultEntries() } })
             }
@@ -47,12 +49,30 @@ struct ContentView: View {
         .padding(.bottom, 8)
     }
 
+    private var trimmedSearchText: String {
+        searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    private var filteredEntries: [JournalEntry] {
+        let query = trimmedSearchText
+        guard !query.isEmpty else { return entries }
+        return entries.filter { entry in
+            let searchableFields = [entry.title, entry.body, entry.locationName ?? ""] + entry.tags
+            return searchableFields.contains { $0.localizedCaseInsensitiveContains(query) }
+        }
+    }
+
     @ViewBuilder
     private var tabContent: some View {
-        if selectedTab == 0 {
-            TimelineListView(entries: entries)
+        if filteredEntries.isEmpty && !trimmedSearchText.isEmpty {
+            ContentUnavailableView(
+                "No entries matching '\(searchText)'",
+                systemImage: "magnifyingglass"
+            )
+        } else if selectedTab == 0 {
+            TimelineListView(entries: filteredEntries)
         } else {
-            MapPlaceholderView()
+            MapView(entries: filteredEntries) { navigationPath.append($0) }
         }
     }
 }

@@ -13,8 +13,10 @@ struct TimelineListView: View {
         } else {
             List {
                 ForEach(entries) { entry in
-                    JournalEntryCard(entry: entry)
-                        .listRowSeparator(.hidden)
+                    NavigationLink(value: entry) {
+                        JournalEntryCard(entry: entry)
+                    }
+                    .listRowSeparator(.hidden)
                         .listRowBackground(Color.clear)
                 }
             }

@@ -7,7 +7,7 @@ enum SolarPhase: String, Codable, Sendable, CaseIterable {
     case night
 }
 
-struct JournalEntry: Identifiable, Codable, Sendable, Equatable {
+struct JournalEntry: Identifiable, Codable, Sendable, Hashable {
     var id: UUID = UUID()
     var createdAt: Date = Date()
     var updatedAt: Date = Date()
