@@ -3,6 +3,10 @@ import SwiftUI
 struct EntryDetailView: View {
     let entry: JournalEntry
 
+    @State private var loadedImages: [UIImage] = []
+    @State private var vault = VaultActor()
+    @State private var selectedPreviewImage: UIImage? = nil
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
@@ -10,9 +14,16 @@ struct EntryDetailView: View {
                 if !entry.tags.isEmpty { tagRow }
                 Divider()
                 bodyText
+                if !loadedImages.isEmpty { attachmentsSection }
                 vaultPathFooter
             }
             .padding()
+        }
+        .task { await loadAttachedAssets() }
+        .fullScreenCover(isPresented: isShowingPreview) {
+            if let selectedPreviewImage {
+                ImagePreviewView(image: selectedPreviewImage)
+            }
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -77,6 +88,54 @@ struct EntryDetailView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .textSelection(.enabled)
             .padding(.vertical, 8)
+    }
+
+    private var attachmentsSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Attachments")
+                .font(.headline)
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 12) {
+                    ForEach(loadedImages.indices, id: \.self) { index in
+                        attachmentThumbnail(loadedImages[index])
+                    }
+                }
+                .padding(.vertical, 6)
+            }
+        }
+    }
+
+    private func attachmentThumbnail(_ image: UIImage) -> some View {
+        Button {
+            selectedPreviewImage = image
+        } label: {
+            Image(uiImage: image)
+                .resizable()
+                .scaledToFill()
+                .frame(height: 180)
+                .clipShape(.rect(cornerRadius: 12))
+                .shadow(color: .black.opacity(0.15), radius: 4, y: 2)
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel("Attached photo")
+    }
+
+    private var isShowingPreview: Binding<Bool> {
+        Binding(
+            get: { selectedPreviewImage != nil },
+            set: { if !$0 { selectedPreviewImage = nil } }
+        )
+    }
+
+    private func loadAttachedAssets() async {
+        guard !entry.assetRelativePaths.isEmpty else { return }
+        var images: [UIImage] = []
+        for path in entry.assetRelativePaths {
+            guard let data = try? await vault.loadAssetData(relativePath: path),
+                  let image = UIImage(data: data) else { continue }
+            images.append(image)
+        }
+        loadedImages = images
     }
 
     private var vaultPathFooter: some View {
