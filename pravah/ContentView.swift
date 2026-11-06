@@ -10,10 +10,16 @@ import SwiftUI
 struct ContentView: View {
     @State private var selectedTab = 0
     @State private var searchText = ""
-    @State private var isPresentingCapture = false
+    @State private var captureRequest: CaptureRequest?
     @State private var entries: [JournalEntry] = []
     @State private var vault = VaultActor()
     @State private var navigationPath: [JournalEntry] = []
+    @State private var droppedPin: DroppedPin?
+
+    private struct CaptureRequest: Identifiable {
+        let id = UUID()
+        let pin: DroppedPin?
+    }
 
     var body: some View {
         NavigationStack(path: $navigationPath) {
@@ -23,13 +29,13 @@ struct ContentView: View {
                     tabPicker
                     tabContent
                 }
-                AddEntryButton { isPresentingCapture = true }
+                AddEntryButton { captureRequest = CaptureRequest(pin: droppedPin) }
                     .padding(20)
             }
             .navigationTitle("Pravah")
             .navigationDestination(for: JournalEntry.self) { EntryDetailView(entry: $0) }
-            .sheet(isPresented: $isPresentingCapture) {
-                QuickCaptureSheet(onSave: { Task { await loadVaultEntries() } })
+            .sheet(item: $captureRequest) { request in
+                QuickCaptureSheet(initialPin: request.pin, onSave: { Task { await loadVaultEntries() } })
             }
             .task { await loadVaultEntries() }
         }
@@ -72,7 +78,7 @@ struct ContentView: View {
         } else if selectedTab == 0 {
             TimelineListView(entries: filteredEntries)
         } else {
-            MapView(entries: filteredEntries) { navigationPath.append($0) }
+            MapView(entries: filteredEntries, droppedPin: $droppedPin) { navigationPath.append($0) }
         }
     }
 }

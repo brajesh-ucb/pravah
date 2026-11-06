@@ -1,4 +1,5 @@
 import SwiftUI
+import CoreLocation
 
 struct QuickCaptureSheet: View {
     let onSave: @Sendable () -> Void
@@ -10,6 +11,17 @@ struct QuickCaptureSheet: View {
     @State private var tagsText = ""
     @State private var isSaving = false
     @State private var saveErrorMessage: String?
+    @State private var isPresentingLocationPicker = false
+    @State private var customLatitude: Double?
+    @State private var customLongitude: Double?
+    @State private var customLocationName: String?
+
+    init(initialPin: DroppedPin? = nil, onSave: @escaping @Sendable () -> Void) {
+        self.onSave = onSave
+        _customLatitude = State(initialValue: initialPin?.latitude)
+        _customLongitude = State(initialValue: initialPin?.longitude)
+        _customLocationName = State(initialValue: initialPin?.displayName)
+    }
 
     var body: some View {
         NavigationStack {
@@ -22,18 +34,14 @@ struct QuickCaptureSheet: View {
                         .textInputAutocapitalization(.never)
                 }
                 Section("Context") {
-                    ContextBannerCard(
-                        solarPhase: contextEngine.solarPhase,
-                        locationName: contextEngine.locationName,
-                        coordinate: contextEngine.currentLocation?.coordinate,
-                        isFetching: contextEngine.isFetching
-                    )
+                    locationBannerButton
                 }
             }
             .navigationTitle("Quick Capture")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar { toolbarContent }
             .task { await contextEngine.fetchCurrentContext() }
+            .sheet(isPresented: $isPresentingLocationPicker) { locationPicker }
             .alert("Couldn't Save Entry", isPresented: isShowingError) {
                 Button("OK", role: .cancel) { }
             } message: {
@@ -52,6 +60,51 @@ struct QuickCaptureSheet: View {
                 Task { await saveEntry() }
             }
             .disabled(title.trimmingCharacters(in: .whitespaces).isEmpty || isSaving)
+        }
+    }
+
+    private var locationBannerButton: some View {
+        Button(action: {
+            isPresentingLocationPicker = true
+        }) {
+            HStack {
+                Image(systemName: "mappin.and.ellipse")
+                    .foregroundColor(.red)
+                VStack(alignment: .leading) {
+                    Text(customLocationName ?? contextEngine.locationName ?? "Select Location")
+                        .font(.headline)
+                    Text("Tap to search address or drop pin")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
+            .padding(12)
+            .background(Color(.systemGray6))
+            .cornerRadius(10)
+        }
+        .buttonStyle(.plain)
+    }
+
+    private var locationPicker: some View {
+        let currentCoordinate = contextEngine.currentLocation?.coordinate
+        let latitude = customLatitude ?? currentCoordinate?.latitude
+        let longitude = customLongitude ?? currentCoordinate?.longitude
+        let initialCoordinate = latitude.flatMap { latitude in
+            longitude.map { CLLocationCoordinate2D(latitude: latitude, longitude: $0) }
+        }
+        return LocationPickerView(
+            initialCoordinate: initialCoordinate,
+            initialLocationName: customLocationName ?? contextEngine.locationName
+        ) { coordinate, name in
+            Task { @MainActor in
+                customLatitude = coordinate.latitude
+                customLongitude = coordinate.longitude
+                customLocationName = name
+            }
         }
     }
 
@@ -74,9 +127,9 @@ struct QuickCaptureSheet: View {
         return JournalEntry(
             title: title.trimmingCharacters(in: .whitespaces),
             body: entryBody,
-            latitude: coordinate?.latitude,
-            longitude: coordinate?.longitude,
-            locationName: contextEngine.locationName,
+            latitude: customLatitude ?? coordinate?.latitude,
+            longitude: customLongitude ?? coordinate?.longitude,
+            locationName: customLocationName ?? contextEngine.locationName,
             solarPhase: contextEngine.solarPhase,
             tags: parsedTags
         )

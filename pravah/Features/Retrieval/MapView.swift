@@ -5,30 +5,63 @@ struct MapView: View {
     let entries: [JournalEntry]
     var onSelectEntry: (JournalEntry) -> Void = { _ in }
 
+    @Binding var droppedPin: DroppedPin?
     @State private var cameraPosition: MapCameraPosition
+    @State private var geocodeTask: Task<Void, Never>?
 
-    init(entries: [JournalEntry], onSelectEntry: @escaping (JournalEntry) -> Void = { _ in }) {
+    init(
+        entries: [JournalEntry],
+        droppedPin: Binding<DroppedPin?> = .constant(nil),
+        onSelectEntry: @escaping (JournalEntry) -> Void = { _ in }
+    ) {
         self.entries = entries
+        _droppedPin = droppedPin
         self.onSelectEntry = onSelectEntry
         _cameraPosition = State(initialValue: .region(Self.region(for: entries)))
     }
 
     var body: some View {
-        Map(position: $cameraPosition) {
-            ForEach(geotaggedEntries) { entry in
-                if let coordinate = Self.coordinate(of: entry) {
-                    Annotation(entry.title, coordinate: coordinate, anchor: .bottom) {
-                        Button { onSelectEntry(entry) } label: {
-                            EntryAnnotationBubble(entry: entry)
+        MapReader { mapProxy in
+            Map(position: $cameraPosition) {
+                ForEach(geotaggedEntries) { entry in
+                    if let coordinate = Self.coordinate(of: entry) {
+                        Annotation(entry.title, coordinate: coordinate, anchor: .bottom) {
+                            Button { onSelectEntry(entry) } label: {
+                                EntryAnnotationBubble(entry: entry)
+                            }
+                            .buttonStyle(.plain)
                         }
-                        .buttonStyle(.plain)
+                        .annotationTitles(.hidden)
                     }
-                    .annotationTitles(.hidden)
                 }
+                if let droppedPin {
+                    Marker(
+                        droppedPin.placeName.isEmpty ? "Dropped Pin" : droppedPin.placeName,
+                        coordinate: CLLocationCoordinate2D(latitude: droppedPin.latitude, longitude: droppedPin.longitude)
+                    )
+                }
+            }
+            .mapFeatureSelectionDisabled { _ in true }
+            .onTapGesture { screenPoint in
+                guard let tappedCoordinate = mapProxy.convert(screenPoint, from: .local) else { return }
+                dropPin(at: tappedCoordinate)
             }
         }
         .onChange(of: entries) {
             withAnimation { cameraPosition = .region(Self.region(for: entries)) }
+        }
+    }
+
+    private func dropPin(at coordinate: CLLocationCoordinate2D) {
+        droppedPin = DroppedPin(latitude: coordinate.latitude, longitude: coordinate.longitude, placeName: "")
+        withAnimation(.easeInOut) {
+            cameraPosition = .camera(MapCamera(centerCoordinate: coordinate, distance: 2000))
+        }
+        geocodeTask?.cancel()
+        geocodeTask = Task {
+            let placeName = await PlaceNameResolver.placeName(at: coordinate)
+            guard !Task.isCancelled else { return }
+            droppedPin?.placeName = placeName ?? ""
         }
     }
 
