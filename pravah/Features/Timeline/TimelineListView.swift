@@ -2,6 +2,7 @@ import SwiftUI
 
 struct TimelineListView: View {
     let entries: [JournalEntry]
+    var semanticMatchedIDs: Set<UUID> = []
 
     var body: some View {
         if entries.isEmpty {
@@ -15,6 +16,15 @@ struct TimelineListView: View {
                 ForEach(entries) { entry in
                     NavigationLink(value: entry) {
                         JournalEntryCard(entry: entry)
+                            .overlay(alignment: .topTrailing) {
+                                if semanticMatchedIDs.contains(entry.id) {
+                                    Image(systemName: "sparkles")
+                                        .font(.caption)
+                                        .foregroundStyle(.tint)
+                                        .padding(8)
+                                        .accessibilityLabel("Semantic match")
+                                }
+                            }
                     }
                     .listRowSeparator(.hidden)
                         .listRowBackground(Color.clear)

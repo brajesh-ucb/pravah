@@ -15,6 +15,8 @@ struct ContentView: View {
     @State private var vault = VaultActor()
     @State private var navigationPath: [JournalEntry] = []
     @State private var droppedPin: DroppedPin?
+    @State private var semanticMatchedIDs: Set<UUID> = []
+    @State private var vectorStore = VectorStoreActor()
 
     private struct CaptureRequest: Identifiable {
         let id = UUID()
@@ -35,14 +37,37 @@ struct ContentView: View {
             .navigationTitle("Pravah")
             .navigationDestination(for: JournalEntry.self) { EntryDetailView(entry: $0) }
             .sheet(item: $captureRequest) { request in
-                QuickCaptureSheet(initialPin: request.pin, onSave: { Task { await loadVaultEntries() } })
+                QuickCaptureSheet(initialPin: request.pin, onSave: { Task { await refreshAfterSave() } })
             }
-            .task { await loadVaultEntries() }
+            .task {
+                await vectorStore.loadPersistedVectors()
+                await loadVaultEntries()
+            }
+            .task(id: trimmedSearchText) { await updateSemanticMatches(for: trimmedSearchText) }
         }
     }
 
     private func loadVaultEntries() async {
         entries = (try? await vault.fetchAllEntries()) ?? []
+    }
+
+    private func refreshAfterSave() async {
+        await vectorStore.loadPersistedVectors()
+        await loadVaultEntries()
+    }
+
+    private func updateSemanticMatches(for query: String) async {
+        guard !query.isEmpty else {
+            semanticMatchedIDs = []
+            return
+        }
+        guard let queryVector = await EmbeddingEngine().generateEmbedding(for: query) else {
+            semanticMatchedIDs = []
+            return
+        }
+        let matches = await vectorStore.search(queryVector: queryVector, topK: 10, threshold: 0.45)
+        guard !Task.isCancelled else { return }
+        semanticMatchedIDs = Set(matches.map(\.entryID))
     }
 
     private var tabPicker: some View {
@@ -62,10 +87,12 @@ struct ContentView: View {
     private var filteredEntries: [JournalEntry] {
         let query = trimmedSearchText
         guard !query.isEmpty else { return entries }
-        return entries.filter { entry in
-            let searchableFields = [entry.title, entry.body, entry.locationName ?? ""] + entry.tags
-            return searchableFields.contains { $0.localizedCaseInsensitiveContains(query) }
-        }
+        return entries.filter { matchesKeyword($0, query: query) || semanticMatchedIDs.contains($0.id) }
+    }
+
+    private func matchesKeyword(_ entry: JournalEntry, query: String) -> Bool {
+        let searchableFields = [entry.title, entry.body, entry.locationName ?? ""] + entry.tags
+        return searchableFields.contains { $0.localizedCaseInsensitiveContains(query) }
     }
 
     @ViewBuilder
@@ -76,7 +103,7 @@ struct ContentView: View {
                 systemImage: "magnifyingglass"
             )
         } else if selectedTab == 0 {
-            TimelineListView(entries: filteredEntries)
+            TimelineListView(entries: filteredEntries, semanticMatchedIDs: semanticMatchedIDs)
         } else {
             MapView(entries: filteredEntries, droppedPin: $droppedPin) { navigationPath.append($0) }
         }

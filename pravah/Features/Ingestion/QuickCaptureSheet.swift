@@ -217,11 +217,22 @@ struct QuickCaptureSheet: View {
                 entry.assetRelativePaths = [assetPath]
             }
             _ = try await vault.saveEntry(entry)
+            await indexEmbedding(for: entry)
             onSave()
             dismiss()
         } catch {
             saveErrorMessage = error.localizedDescription
         }
+    }
+
+    private func indexEmbedding(for entry: JournalEntry) async {
+        let combinedText = [entry.title, entry.body]
+            .filter { !$0.isEmpty }
+            .joined(separator: "\n\n")
+        guard let vector = await EmbeddingEngine().generateEmbedding(for: combinedText) else { return }
+        let vectorStore = VectorStoreActor()
+        await vectorStore.loadPersistedVectors()
+        await vectorStore.setVector(vector, for: entry.id)
     }
 }
 
